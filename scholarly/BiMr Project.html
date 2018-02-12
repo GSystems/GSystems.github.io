@@ -2,9 +2,9 @@
 <html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>BiMr - Bird Migration Tool</title>
-    <link rel="stylesheet" href="./project_files/scholarly.css">
-    <link rel="stylesheet" href="./project_files/prism-coy.css">
-    <script src="./project_files/prism.js" defer=""></script>
+    <link rel="stylesheet" href="./BiMr Project_files/scholarly.css">
+    <link rel="stylesheet" href="./BiMr Project_files/prism-coy.css">
+    <script src="./BiMr Project_files/prism.js.descărcare" defer=""></script>
   </head>
   <body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
     <header>
@@ -12,7 +12,7 @@
       <p class="subtitle">Scholarly Html Technical Report </p>
     </header>
     <article id="what" typeof="schema:ScholarlyArticle" resource="#">
-      <h1><img src="./project_files/bird.png" style="width:35px;height:25px; margin-right:15px; margin-top:10px">BiMr - Bird Migration Tool</h1>
+      <h1><img src="./BiMr Project_files/bird.png" style="width:35px;height:25px; margin-right:15px; margin-top:10px">BiMr - Bird Migration Tool</h1>
       <section>
         <ol>
           <li property="schema:author" typeof="sa:ContributorRole">
@@ -114,6 +114,16 @@
                 <li><a href="https://docs.oracle.com/javaee/6/tutorial/doc/gijsz.html">Enterprise JavaBeans (EJB)</a> is one of several Java APIs for modular construction of enterprise software. EJB is a server-side software component that encapsulates business logic of an application. The EJB specification is a subset of the Java EE specification.</li>
                 <li><a href="http://hibernate.org/">Hibernate ORM</a>, an object-relational mapping tool for the Java programming language. It provides a framework for mapping an object-oriented domain model to a relational database.</li>
                 <li><a href="https://nlp.stanford.edu/">Stanford NLP</a> is a team of faculty, postdocs, programmers and students who work together on algorithms that allow computers to process and understand human languages, by covering areas such as sentence understanding, automatic question answering, machine translation, syntactic parsing and tagging, sentiment analysis, and models of text and visual scenes, as well as applications of natural language processing to the digital humanities and computational social sciences. </li>
+                <li><a href="https://en.wikipedia.org/wiki/Jena_(framework)">Apache Jena</a> is an open source Semantic Web framework for Java. It provides an API to extract data from and write to RDF graphs. The graphs are represented as an abstract "model". A model can be sourced with data from files, databases, URLs or a combination of these. A Model can also be queried through SPARQL</li>
+                <li><a href="https://jena.apache.org/documentation/fuseki2/">Apache Jena Fuseki</a> is a SPARQL server. It can run as a operating system service, as a Java web application (WAR file), and as a standalone server. It provides security (using Apache Shiro) and has a user interface for server monitoring and administration.
+                  It provides the SPARQL 1.1 protocols for query and update as well as the SPARQL Graph Store protocol.
+
+                  Fuseki is tightly integrated with TDB to provide a robust, transactional persistent storage layer, and incorporates Jena text query and Jena spatial query. 
+                  It can be used to provide the protocol engine for other RDF query and storage systems.
+                </li>                
+                <li><a href="http://jmeter.apache.org/index.html">Apache JMeter™</a> is a open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions. 
+                  Apache JMeter may be used to test performance both on static and dynamic resources, Web dynamic applications. 
+                  It can be used to simulate a heavy load on a server, group of servers, network or object to test its strength or to analyze overall performance under different load types.</li>
               </ul>
             </li>
             <li>
@@ -137,7 +147,7 @@
           For this, we will develope our application by adapting the following architecture: 
 
           <figure typeof="sa:Image">
-            <img src="./project_files/x-frame-architecture.png" width="1050" height="800">
+            <img src="./BiMr Project_files/x-frame-architecture.png" width="1050" height="800">
             <figcaption style="text-align: center">
               Figure 1. Architecture model
             </figcaption>
@@ -151,7 +161,7 @@
             After studying the architecture shown above, we have come up with the following four main components of our application:
           </p>
           <figure typeof="sa:Image">
-            <img src="./project_files/Deployment Diagram.png" width="950" height="700">
+            <img src="./BiMr Project_files/architecture_models_flow.png" width="950" height="700">
             <figcaption style="text-align: center">
               Figure 2. Communication between modules
             </figcaption>
@@ -169,9 +179,9 @@
           </p>
 
           <figure typeof="sa:Image">
-            <img src="./project_files/bpmn.svg" width="950" height="700">
+            <img src="./BiMr Project_files/bpmn.svg" width="950" height="700">
             <figcaption style="text-align: center">
-              Figure 3. Class Diagram
+              Figure 3. BPMN Diagram
             </figcaption>
           </figure>
 
@@ -185,21 +195,214 @@
             In the case of data provided by the <a href="https://confluence.cornell.edu/display/CLOISAPI/eBird+API+1.1">eBird API</a> the things are way simpler because the API provides all information needed by our application.
           </p>
 
+               <p> In order to find out if a simple word represents a name for a bird species or any other interesting entity (like person, link, location, author, etc.) we manually trained a model. These data represents the classifier in action. Obviously, some assumptions are wrong, because we need a lot more (manually) annotated tweets to obtain good results. From our calculations, we can obtain 65% rate of success with this classifier. </p>
+
+            <xmp>
+                [hawk] pos: [NN] ne: [BISP]
+                [today] pos: [NN] ne: [TIME]
+                [winter] pos: [NN] ne: [DATE]
+                [hawk] pos: [NN] ne: [BISP]
+                [hawk] pos: [NN] ne: [BISP]
+                [White-throated] pos: [JJ] ne: [BISP]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Whopper] pos: [NNP] ne: [BISP]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Washington] pos: [NNP] ne: [LOC]
+                [today] pos: [NN] ne: [TIME]
+                [!!!] pos: [CD] ne: [NUMBER]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Osprey] pos: [NNP] ne: [BISP]
+                [Urbanized] pos: [JJ] ne: [BISP]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [Friday] pos: [NNP] ne: [BISP]
+                [eagles] pos: [NNS] ne: [BISP]
+                [today] pos: [NN] ne: [TIME]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [???] pos: [CD] ne: [NUMBER]
+                [Tufted] pos: [JJ] ne: [BISP]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [Tricolored] pos: [JJ] ne: [BISP]
+                [eagle] pos: [NN] ne: [BISP]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [Eagles] pos: [NNPS] ne: [BISP]
+                [red-tailed] pos: [JJ] ne: [BISP]
+                [Eagle] pos: [NNP] ne: [BISP]
+                [6] pos: [CD] ne: [NUMBER]
+                [Killdeer] pos: [NNP] ne: [BISP]
+                [this] pos: [DT] ne: [TIME]
+                [morning] pos: [NN] ne: [TIME]
+                [one] pos: [CD] ne: [NUMBER]
+                [4] pos: [CD] ne: [NUMBER]
+                [Killdeer] pos: [NN] ne: [BISP]
+                [Killdeer] pos: [NNP] ne: [BISP]
+                [day] pos: [NN] ne: [DURATION]
+                [Killdeer] pos: [NNP] ne: [BISP]
+                [Killdeers] pos: [NNS] ne: [BISP]
+                [winter] pos: [NN] ne: [DATE]
+                [months] pos: [NNS] ne: [DURATION]
+                [Killdeer] pos: [NN] ne: [BISP]
+                [Killdeer] pos: [NNP] ne: [BISP]
+                [one] pos: [CD] ne: [NUMBER]
+                [today] pos: [NN] ne: [TIME]
+                [The] pos: [DT] ne: [DATE]
+                [other] pos: [JJ] ne: [DATE]
+                [day] pos: [NN] ne: [DATE]
+                [I] pos: [CD] ne: [NUMBER]
+                [Killdeer] pos: [NNP] ne: [BISP]
+                [Killdeers] pos: [NNP] ne: [BISP]
+                [today] pos: [NN] ne: [TIME]
+
+        </xmp>
+
+
           <h2>Data Persistance</h2>
           <p>
-            All of the data collected will be filtered by the necessities of our application and 
-            the resulted  will be stored in in <a href="https://en.wikipedia.org/wiki/RDFa">RDFa</a> format.
-            The same model of data will be used for the information coming from twitter as well as the information coming from eBird.
+            All of the collected data is filtered in respect to the necessities of our application and 
+            the results are stored in <a href="https://en.wikipedia.org/wiki/RDFa">RDFa</a> format.
+            The same model of data is used for both the information coming from Twitter and the information coming from eBird API.
           </p>
 
 
           <figure typeof="sa:Image">
-            <img src="./project_files/SequenceDiagram.png" width="950" height="700">
+            <img src="./BiMr Project_files/SequenceDiagram.png" width="950" height="700">
             <figcaption style="text-align: center">
              Figure 4. Application sequence diagram
             </figcaption>
           </figure>
+          
+  <h3> Internal Data Models </h3>
 
+          <p> The Tweet is the essential entity in our application, therefore the comunication between modules implies sending and receiving information about tweets and their owners. All the stored data will be in the RDF/XML format, aiming to model the necessary information about a tweet. </p>
+
+          <xmp>
+            <rdf:RDF
+              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+              xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+              xmlns:bimr="http://xmlns.com/bimr#">
+              <rdf:Description rdf:about="http://xmlns.com/bimr/user#132">
+                <vcard:NAME>Markus Berg</vcard:NAME>
+                <vcard:UID>131242</vcard:UID>
+                <vcard:ADR>Ohio</vcard:ADR>
+                <vcard:EMAIL>marksbrg@gmail.com</vcard:EMAIL>
+                <vcard:NICKNAME>MarkB</vcard:NICKNAME>
+                <bimr:hasGeoEnabled>true</bimr:hasGeoEnabled>
+              </rdf:Description>
+            </rdf:RDF>
+
+          </xmp>
+
+          <figcaption style="text-align: center"> RDF/XML data format modelling an user </figcaption>
+
+          <xmp>
+          <rdf:RDF
+              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+              xmlns:bimr="http://xmlns.com/bimr#"
+              xmlns:tweet="http://xmlns.com/tweet#">
+            <rdf:Description rdf:about="http://xmlns.com/bimr/tweet#32">
+              <bimr:id>32</bimr:id>
+              <tweet:language>en</tweet:language>
+              <tweet:text>Eagle Friday! This pair of eagles are our observation today.</tweet:text>
+              <tweet:link>https://tinyurl.com/214adfjkhv4a1</tweet:link>
+              <tweet:author>Marcel Ron</tweet:author>
+            </rdf:Description>
+          </rdf:RDF>
+
+          </xmp>
+
+          <figcaption style="text-align: center"> RDF/XML data format modelling a tweet </figcaption>
+
+
+          <xmp>
+
+            <rdf:RDF
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:location="http://xmlns.com/location#">
+              <rdf:Description rdf:about="http://xmlns.com/bimr/location#935a5197-4eef-40e6-957a-d2f90eaf2da9">
+                <location:latitude>57.52</location:latitude>
+                <location:longitude>12.81</location:longitude>
+                <location:city>Ildaho</location:city>
+                <location:state>Ohio</location:state>
+                <location:country>USA</location:country>
+              </rdf:Description>
+            </rdf:RDF>
+
+          </xmp>
+
+          <figcaption style="text-align: center"> RDF/XML data format modelling a location </figcaption>
+
+
+          <xmp>
+
+            <rdf:RDF
+              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+              xmlns:bimr="http://xmlns.com/bimr#"
+              xmlns:location="http://xmlns.com/location#"
+              xmlns:tweet="http://xmlns.com/tweet#"
+              xmlns:observation="http://xmlns.com/observation#">
+            <rdf:Description rdf:about="http://xmlns.com/bimr/observation#a653e810-9b83-4f43-a21b-cfaa84e789e1">
+              <observation:birdSpecies>eagles</bimr:birdSpecies>
+              <observation:birdSpecies>hawks</bimr:birdSpecies>
+              <observation:date>Fri Jan 05 00:00:00 EET 2018</bimr:date>
+              <observation:informationSourceId>twitter</bimr:informationSourceId>
+              <observation:location rdf:about="http://xmlns.com/bimr/location#935a5197-4eef-40e6-957a-d2f90eaf2da9">
+                <location:latitude>57.52</location:latitude>
+                  <location:longitude>12.81</location:longitude>
+                  <location:city>Ildaho</location:city>
+                  <location:state>Ohio</location:state>
+                  <location:country>USA</location:country>
+                </rdf:Description>
+              <observation:tweet rdf:parseType="Resource">
+                <tweet:tweetId>32</bimr:tweetId>
+                <tweet:text>Eagle Friday! This pair of eagles and hawsks are our observation today.</tweet:text>
+              </rdf:Description>
+            </rdf:Description>
+          </rdf:RDF>
+
+          </xmp>
+          <figcaption style="text-align: center"> RDF/XML data format modelling an observation </figcaption>
+
+
+          <xmp>
+            <rdf:RDF
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:bimr="http://xmlns.com/bimr#"
+                xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+                xmlns:location="http://xmlns.com/location#"
+                xmlns:tweet="http://xmlns.com/tweet#"
+                xmlns:observation="http://xmlns.com/observation#">
+              <rdf:Description rdf:about="http://xmlns.com/bimr/hotspot#69003615-2335-4b59-930c-44ce1eb265d2">
+                  <rdf:Description rdf:about="http://xmlns.com/bimr/user#132">
+                  <vcard:NAME>Markus Berg</vcard:NAME>
+                  <vcard:UID>131242</vcard:UID>
+                  <vcard:ADR>Ohio</vcard:ADR>
+                  <vcard:EMAIL>marksbrg@gmail.com</vcard:EMAIL>
+                  <vcard:NICKNAME>MarkB</vcard:NICKNAME>
+                  <bimr:hasGeoEnabled>true</bimr:hasGeoEnabled>
+                </rdf:Description>
+                <rdf:Description rdf:about="http://xmlns.com/bimr/observation#a653e810-9b83-4f43-a21b-cfaa84e789e1">
+                  <observation:birdSpecies>eagles</bimr:birdSpecies>
+                  <observation:birdSpecies>hawks</bimr:birdSpecies>
+                  <observation:date>Fri Jan 05 00:00:00 EET 2018</bimr:date>
+                  <observation:informationSourceId>twitter</bimr:informationSourceId>
+                  <observation:location rdf:parseType="Resource">
+                    <location:longitude>-102.2</location:longitude>
+                    <location:latitude>80.21</location:latitude>
+                  </observation:location>
+                  <observation:tweet rdf:about="http://xmlns.com/bimr/tweet#32">
+                    <tweet:tweetId>32</bimr:tweetId>
+                    <tweet:text>Eagle Friday! This pair of eagles and hawsks are our observation today.</tweet:text>
+                  </rdf:about>
+                </rdf:Description>
+              </rdf:Description>
+            </rdf:RDF>
+          
+          </xmp>
+          <figcaption style="text-align: center"> RDF/XML data format modelling a hotspot </figcaption>
           <h2>Data visualization</h2>
           <p>
             All of the data which have been collected and processed will be renderend on a world map with the help of 
@@ -212,21 +415,25 @@
             what are the prefered migration routes of certain species each year, how much time they spend in one place (amount of months, for example) etc.
           </p>
 
+     
+
+
+          <p>
+            Up above is an example of geoJSON, a format for encoding a variety of geographic data structures.
+            We use it to pinpoint bird hotspots on the map so we can further illustrate the migration phenomena. 
+          </p>
 
           <figure typeof="sa:Image">
-            <img src="./project_files/worldMap.png" width="950" height="700">
+            <img src="./BiMr Project_files/worldMap.png" width="950" height="700">
             <figcaption style="text-align: center">Figure 5. Birds that we're spotted</figcaption>
           </figure>
 
           <figure typeof="sa:Image">
-            <img src="./project_files/descriptionSpecies.png" width="950" height="700">
+            <img src="./BiMr Project_files/descriptionSpecies.png" width="950" height="700">
             <figcaption style="text-align: center">Figure 6. Species Information</figcaption>
           </figure>
 
-
-
-
-        <section typeof="sa:Open Api" id="openApi">
+   <section typeof="sa:Open Api" id="openApi">
           <h2>Open API</h2>
           <p>
             The application will provide an REST API which can be used to access the data collected by the aplication.  The API will define a set of functions which will offer information about the data, from where has been collected, statistics about the data and the data itself.  Developers can perform requests and receive responses via HTTP protocol such as GET and POST. The responses will be in JSON format.
@@ -237,43 +444,151 @@
           <ul>
             <li>/tweets</li>
             <ul>
-              <li>/all – returns all the tweets stored by the application;</li>
-              <li>/date/from/{date} – returns all the tweets from the respective date stored by the application;</li>
-              <li>/date/between?{startDate}&{endDate} – returns all the tweets from the time interval stored by the application;</li>
+              <li>/ws/bimr/getAllTweets – returns all the tweets stored by the application;</li>
             </ul>
             <li>/data</li>
               <ul>
-                <li>/obs /recent – returns the data collected by the application in the last  seven days;</li>
-                <li>/obs/location/?{lat}&{lng}&{range}– returns all the data collected by the application at the specified location and in the range specified (km) ;</li>
-                <li>/obs/date?{datetime} – returns the data collected by the application on the specified date;</li>
-                <li>/obs/date?{startDate}&{endDate} – returns the data collected by the application between the specified interval;</li>
-                <li>/obs/bird?{commonName} – return the data about the birds specified by the ‘commonName’ argument;</li>
+                <li>/ws/bimr/getAllMigrations – returns the data collected by the application in the last  seven days;</li>
+                <li>/ws/bimr/getMigrationsByDate{startDate}/{endDate}– returns all the data collected by the application at the specified location and in the range specified (km) ;</li>
               </ul>
             <li>/stats</li>
             <ul>
-              <li>/birds/ count?{commonName} – returns all the number of data about the birds with the specfied name;</li>
-              <li>/location?{lat}&{lng} – returns a json with the information about the birds that have spotted at the location within 50 km, like the total number of birds spotted, the composition of the migration, etc; </li>
+              <li>/ws/bimr/getMostObservedSpecies - returns a list with all species ordered by the number of their appeareance in tweets
             </ul>
           </ul>
         </section>
 
+
           <p>
-            The representation of the data coming from the Open API:
+            The representation of migration object coming from the Open API:
           </p>
           <pre class=" language-json"><code class=" language-json">
-{
-  lng: -76.5190244,
-  lat: 42.4618954,
-  locName: "Hog Hole (Allan H. Treman State Marine Park)",
-  howMany: 2,
-  sciName: "Corvus brachyrhynchos",
-  locationPrivate: false,
-  obsDt: "2017-11-25 13:42",
-  comName: "American Crow",
-}
+            {
+              "features": [
+                  {
+                      "geometry": {
+                          "coordinates": [
+                              7.17,
+                              58.68
+                          ],
+                          "type": "Point"
+                      },
+                      "type": "Feature",
+                      "properties": {
+                          "migrationId": "c557c9b3-3edf-493d-94ec-b2ad278cf8c5",
+                          "toHotspot": {
+                              "observationDate": {
+                                  "year": 2018,
+                                  "month": "JANUARY",
+                                  "dayOfMonth": 5,
+                                  "dayOfWeek": "FRIDAY",
+                                  "dayOfYear": 5,
+                                  "monthValue": 1,
+                                  "nano": 123000000,
+                                  "hour": 9,
+                                  "minute": 30,
+                                  "second": 10,
+                                  "chronology": {
+                                      "id": "ISO",
+                                      "calendarType": "iso8601"
+                                  }
+                              },
+                              "hotspotId": "4b9c5017-b016-44d0-9677-b71190a826d5",
+                              "geometry": {
+                                  "coordinates": [
+                                      12.81,
+                                      57.52
+                                  ],
+                                  "type": "Point"
+                              },
+                              "birdSpeciesList": [
+                                  "Eagle"
+                              ]
+                          },
+                          "species": "Eagle",
+                          "toHotspotId": "4b9c5017-b016-44d0-9677-b71190a826d5",
+                          "fromHotspot": {
+                              "observationDate": {
+                                  "year": 2018,
+                                  "month": "JANUARY",
+                                  "dayOfMonth": 3,
+                                  "dayOfWeek": "WEDNESDAY",
+                                  "dayOfYear": 3,
+                                  "monthValue": 1,
+                                  "nano": 123000000,
+                                  "hour": 9,
+                                  "minute": 30,
+                                  "second": 10,
+                                  "chronology": {
+                                      "id": "ISO",
+                                      "calendarType": "iso8601"
+                                  }
+                              },
+                              "hotspotId": "356f4742-907d-4ae1-a02c-c1df2f5ddd09",
+                              "geometry": {
+                                  "coordinates": [
+                                      7.17,
+                                      58.68
+                                  ],
+                                  "type": "Point"
+                              },
+                              "birdSpeciesList": [
+                                  "Eagle"
+                              ]
+                          },
+                          "fromHotpsotId": "356f4742-907d-4ae1-a02c-c1df2f5ddd09"
+                      }
+                  }
+                }
           </code></pre>
 
           </code></pre>
+
+          <h2>Results for non-functional testing (stress testing)</h2>
+          <p>
+            <b><a href="http://jmeter.apache.org/index.html">Apache JMeter™</a></b><br>
+            The Apache JMeter™ application is open source software, a 100% pure Java application designed to load test
+            functional behavior and measure performance. It was originally designed for testing Web Applications but has
+            since expanded to other test functions.            
+          </p>
+          
+          <figure typeof="sa:Image">
+            <img src="./BiMr Project_files/stress_100.PNG" width="950" height="700">
+            <figcaption style="text-align: center">Figure 7. Latency graph for 100 users accessing BiMr application</figcaption>
+          </figure>
+
+          <figure typeof="sa:Image">
+            <img src="./BiMr Project_files/stress_200.PNG" width="950" height="700">
+            <figcaption style="text-align: center">Figure 8. Latency graph for 200 users accessing BiMr application</figcaption>
+          </figure>
+
+          <figure typeof="sa:Image">
+            <img src="./BiMr Project_files/stress_500.PNG" width="950" height="700">
+            <figcaption style="text-align: center">Figure 9. Latency graph for 500 users accessing BiMr application</figcaption>
+          </figure>
+
+          <p>
+            We can easily observe that handling 100 users requesting access to our application doesn't take too much. 
+          </p>
+          <p>
+            Almost the same goes for the case where BiMr server has to cope with 200 requests at once from 200 users. There are some 
+            increase spikes in latency however, especially when our application makes use of the scheduled caller to the Twitter API.
+          </p>
+          <p>
+            When it comes to handling 500 users at the same time, the application server can handle about one hundred requests before starting
+            to lag (latency spikes to be observed). Moreover, after about 300 requests, the server enters a freeze state where it cannot handle the
+            remaining requests in the waiting queue.
+          </p>
+          <p>
+            We can easily see that the application could handle a relatively small but important number of users in its 
+            incipient phases and could really have improvements on how it can handle the requests more efficiently in the future versions. 
+          </p>
+          
+        <figcaption style="text-align: center">
+          Graphics obtained by using Apache JMeter to stress test the application server
+        </figcaption>
+      <p></p>
+
           <h2>External data sources</h2>
             <p>
               <b><a href="https://dev.twitter.com/streaming/public">Twitter Public Streaming API</a></b><br>
